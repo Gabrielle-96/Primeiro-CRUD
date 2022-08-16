@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+    color: rgb(0, 0, 3);
+    border: none;
+}
+
+ /*
+ head {
+    width: 102%;
+    background: #00652e;
+    height: auto;
+    padding: 23px 0;
+} 
+*/
+h2 {
+    color: rgb(0, 0, 3);
+    font-family: Helvetica;
+}
+
+body {
+    background-image: url('../img/ImgTora2.PNG');
+    background-size: cover;
+}
+
+a, label { 
+    font-size: .8rem;
+}
+
+a:hover {
+    color: #00652d;
+}
+
+#login-container {
+    background-color: #FFF;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 30px;
+    margin-top: 20vh;
+    border-radius: 20px;
+    text-align: center;
+}
+
+form {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+label, input {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    border-bottom: 2px solid rgb(0, 0, 3);
+    padding: 8px;
+    font-size: 1rem;
+    margin-bottom: 18px;
+}
+
+input:focus {
+    border-bottom: 2px solid #00652d;
+}
+
+#forgot-pass {
+    text-align: right;
+    display: block;
+}
+
+input[type="submit"] {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 35px;
+    border-radius: 20px;
+    margin-top: 30px;
+    color: white;
+    background-color: #00652f;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #023105;
+    transition: .5s;
+}
