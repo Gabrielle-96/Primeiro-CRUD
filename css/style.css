@@ -15,10 +15,10 @@
     padding: 23px 0;
 } 
 */
-h2 {
+/*h2 {
     color: rgb(0, 0, 3);
     font-family: Helvetica;
-}
+} */
 
 body {
     background-image: url('../img/ImgTora2.PNG');
@@ -46,7 +46,7 @@ a:hover {
 
 form {
     margin-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 label, input {
@@ -60,14 +60,14 @@ label {
 }
 
 input {
-    border-bottom: 2px solid rgb(0, 0, 3);
-    padding: 8px;
+    border-bottom:  2px solid rgb(0, 0, 3);
+    padding: 10px;
     font-size: 1rem;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 input:focus {
-    border-bottom: 2px solid #00652d;
+    border-width: 2px solid #00652d;
 }
 
 #forgot-pass {
@@ -80,7 +80,7 @@ input[type="submit"] {
     text-transform: uppercase;
     font-weight: bold;
     border: none;
-    height: 35px;
+    height: 40px;
     border-radius: 20px;
     margin-top: 30px;
     color: white;
@@ -92,3 +92,32 @@ input[type="submit"]:hover {
     background-color: #023105;
     transition: .5s;
 }
+
+#social-container, #social-container p {
+    margin-bottom: 20px;
+}
+
+#social-container i {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    color: #FFF;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.fa-facebook-f{
+    background-color: #3B5998;
+}
+
+.fa-linkedin {
+    background-color: #0077b5;
+}
+
+/*.fa-google {
+    background-image: url('../img/imgGoogle.png');
+    margin: 5px;
+}
+*/
+
