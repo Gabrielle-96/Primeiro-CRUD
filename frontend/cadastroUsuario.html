@@ -12,7 +12,7 @@
         <form id="register-form">
             <div class="full-box">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" data-min-length="5">
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" data-min-length="5" data-required>
             </div>
             <div class="half-box spacing">
                 <label for="name">Nome</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="half-box">
                 <input type="checkbox" name="agreement" id="agreement">
-                <label for="agreement">Eu li e aceito os <a href="#">termos de uso</a></label>
+                <label for="agreement" class="agreement-label">Eu li e aceito os <a href="#">termos de uso</a></label>
             </div>
             <div class="full-box">
                 <input type="submit" id="btn-submit" value="Registrar">
@@ -40,6 +40,6 @@
         </form>
     </div> 
     <p class="error-validation template"></p>
-    <script src="cadastroUsuario.js"></script>
+    <script src="js/cadastroUsuario.js"></script>
 </body>
 </html>
