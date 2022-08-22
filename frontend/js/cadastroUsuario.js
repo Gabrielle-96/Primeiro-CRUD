@@ -8,7 +8,7 @@ class Validator {
             'data-email-validate',
             'data-only-letters',
             'data-equal',
-            'data-password-validate'            
+            'data-password-validate'
         ]
     }
 
@@ -82,11 +82,11 @@ class Validator {
 
         let errorMessage = `Insira um email válido (exemplo: email@email.com)`;
 
-        if(!re.test(email)) {
+        if (!re.test(email)) {
             this.printMessage(input, errorMessage);
             return false;
         }
-        
+
         return true;
     }
 
@@ -98,7 +98,7 @@ class Validator {
 
         let errorMessage = `Este campo deve conter apenas letras (A-Z, a-z)`;
 
-        if(!re.test(inputValue)) {
+        if (!re.test(inputValue)) {
             this.printMessage(input, errorMessage);
             return false;
         }
@@ -126,10 +126,10 @@ class Validator {
         let uppercases = 0;
         let numbers = 0;
 
-        for(let i = 0; arrayCaracter.length > i; i++) {
-            if(arrayCaracter[i] === arrayCaracter[i].toUpperCase() && isNaN(parseInt(arrayCaracter[i]))){
+        for (let i = 0; arrayCaracter.length > i; i++) {
+            if (arrayCaracter[i] === arrayCaracter[i].toUpperCase() && isNaN(parseInt(arrayCaracter[i]))) {
                 uppercases++;
-            }else if(!isNaN(parseInt(arrayCaracter[i]))) {
+            } else if (!isNaN(parseInt(arrayCaracter[i]))) {
                 numbers++;
             }
         }
@@ -140,7 +140,7 @@ class Validator {
             this.printMessage(input, errorMessage);
             return false;
         }
-        
+
         return true;
     }
 
@@ -195,24 +195,66 @@ submit.addEventListener('click', function (e) {
     }
 
     const formData = new FormData(form);
-	const plainFormData = Object.fromEntries(formData.entries());
-	const formDataJsonString = JSON.stringify(plainFormData);
-    
-    fetch('http://localhost:3000/usuario', {
-    	method: 'POST',
-		headers: {
-			"Content-Type": "application/json"
-		},
-	    body: formDataJsonString
-    })
-    .then(data => {
-        alert("Usuário registrado com sucesso!");
-        form.reset();
-    })
-    .catch(function(res){ 
-        alert("Erro ao registrar usuário");
-        console.log(res);
-    });
+    const plainFormData = Object.fromEntries(formData.entries());
+    const formDataJsonString = JSON.stringify(plainFormData);
 
+    fetch('http://localhost:3000/usuario', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: formDataJsonString
+    })
+        .then(data => {
+            alert("Usuário registrado com sucesso!");
+            form.reset();
+        }).catch(function (res) {
+            alert("Erro ao registrar usuário");
+            console.log(res);
+        });
 });
 
+    // inserindo o viaCEP
+
+    const limparFormulario = (endereco) => {
+        document.getElementById('endereco').value = '';
+        document.getElementById('bairro').value = '';
+        document.getElementById('cidade').value = '';
+        document.getElementById('estado').value = '';
+    }
+    
+    
+    const preencherFormulario = (endereco) => {
+        document.getElementById('endereco').value = endereco.logradouro;
+        document.getElementById('bairro').value = endereco.bairro;
+        document.getElementById('cidade').value = endereco.localidade;
+        document.getElementById('estado').value = endereco.uf;
+    }
+    
+    
+    const eNumero = (numero) => /^[0-9]+$/.test(numero);
+    
+    const cepValido = (cep) => cep.length == 8 && eNumero(cep);
+    
+    const pesquisarCep = async () => {
+        limparFormulario();
+    
+        const cep = document.getElementById('cep').value;
+        const url = `https://viacep.com.br/ws/${cep}/json/`;
+        if (cepValido(cep)) {
+            const dados = await fetch(url);
+            const endereco = await dados.json();
+            if (endereco.hasOwnProperty('erro')) {
+                document.getElementById('endereco').value = 'CEP não encontrado!';
+            } else {
+                preencherFormulario(endereco);
+                //console.log(endereco);
+            }
+        } else {
+            document.getElementById('endereco').value = 'CEP incorreto!';
+        }
+    
+    }
+    
+    document.getElementById('cep')
+        .addEventListener('focusout', pesquisarCep);
