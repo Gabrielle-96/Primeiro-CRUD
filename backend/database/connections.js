@@ -5,9 +5,17 @@ var knex = require('knex') ({
         host: 'localhost',
         user:  'root',
         port: 3306,
-        password: 'Ineffabilis.22',
+        password: 'acesso',
         database: 'projeto_tora',
     }
 });
+
+// connection: {
+//     host: 'localhost',
+//     user:  'root',
+//     port: 3306,
+//     password: 'Ineffabilis.22',
+//     database: 'projeto_tora',
+// }
 
 module.exports = knex

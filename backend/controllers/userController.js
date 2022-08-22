@@ -1,19 +1,19 @@
-const { response } = require('express')
 const database = require('../database/connections')
+const md5 = require('md5');
 
 class userController {
-    novaTarefa(req, res) {
-        const {email, nome, sobrenome, senha} = req.body
-
-        console.log("AAAAAA",email, nome, sobrenome, senha)
+    novoUsuario(req, res) {
+        let {email, nome, sobrenome, senha} = req.body
+        senha = md5(senha);
+        // console.log("AAAAAA",email, nome, sobrenome, senha);
 
         database.insert({email, nome, sobrenome, senha}).table("usuarios").then(data=>{
-            console.log(data)
-            response.json({message:"Tarefa criada com sucesso!"})
+            // console.log(data)
+            res.json({message:"Usuário cadastrado com sucesso!"});
         }).catch(error=>{
-            console.log("EEEEEEEE", error) 
+            res.status(400).json({status: 400, message: "Erro ao cadastrar usuário"});
         })
     }
 }
 
-module.exports = new userController()
+module.exports = new userController();
