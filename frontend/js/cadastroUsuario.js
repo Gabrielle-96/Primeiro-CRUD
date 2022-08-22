@@ -8,16 +8,16 @@ class Validator {
             'data-email-validate',
             'data-only-letters',
             'data-equal',
-            'data-password-validate',
-            
+            'data-password-validate'            
         ]
     }
 
     validate(form) {
+        let formValid = true;
 
         let currentValidations = document.querySelectorAll('form .error-validation');
 
-        if(currentValidations.length > 0) {
+        if (currentValidations.length > 0) {
             this.cleanValidations(currentValidations);
         }
 
@@ -29,17 +29,21 @@ class Validator {
 
             for (let r = 0; this.validations.length > r; r++) {
 
-                if(input.getAttribute(this.validations[r]) != null) {
+                if (input.getAttribute(this.validations[r]) != null) {
 
                     let method = this.validations[r].replace('data-', '').replace('-', '');
 
                     let value = input.getAttribute(this.validations[r]);
 
-                    this[method](input, value);
+                    if (this[method](input, value) == false) {
+                        formValid = false;
+                    }
                 }
             }
 
         }, this);
+
+        return formValid;
     }
 
     minlength(input, minValue) {
@@ -48,9 +52,12 @@ class Validator {
 
         let errorMessage = `O campo precisa ter pelo menos ${minValue} caracteres`;
 
-        if(inputLength < minValue) {
+        if (inputLength < minValue) {
             this.printMessage(input, errorMessage);
+            return false;
         }
+
+        return true;
     }
 
     maxlength(input, maxValue) {
@@ -59,9 +66,12 @@ class Validator {
 
         let errorMessage = `O campo precisa ter menos que ${maxValue} caracteres`;
 
-        if(inputLength > maxValue) {
+        if (inputLength > maxValue) {
             this.printMessage(input, errorMessage);
+            return false;
         }
+
+        return true;
     }
 
     emailvalidate(input) {
@@ -74,7 +84,10 @@ class Validator {
 
         if(!re.test(email)) {
             this.printMessage(input, errorMessage);
+            return false;
         }
+        
+        return true;
     }
 
     onlyletters(input) {
@@ -87,7 +100,10 @@ class Validator {
 
         if(!re.test(inputValue)) {
             this.printMessage(input, errorMessage);
+            return false;
         }
+
+        return true;
     }
 
     equal(input, inputName) {
@@ -95,9 +111,12 @@ class Validator {
 
         let errorMessage = `Este campo deve ser igual ao ${inputName}`;
 
-        if(input.value != inputToCompare.value) {
+        if (input.value != inputToCompare.value) {
             this.printMessage(input, errorMessage);
+            return false;
         }
+
+        return true;
     }
 
     passwordvalidate(input) {
@@ -115,11 +134,14 @@ class Validator {
             }
         }
 
-        if(uppercases === 0 || numbers === 0) {
+        if (uppercases === 0 || numbers === 0) {
             let errorMessage = `A senha precisa conter um número e um caracter maiúsculo`;
 
             this.printMessage(input, errorMessage);
+            return false;
         }
+        
+        return true;
     }
 
     required(input) {
@@ -128,9 +150,11 @@ class Validator {
 
         if (inputValue === '') {
             let errorMessage = `Este campo é obrigatório`;
-
             this.printMessage(input, errorMessage);
+            return false;
         }
+
+        return true;
     }
 
     printMessage(input, msg) {
@@ -164,6 +188,31 @@ let validator = new Validator();
 submit.addEventListener('click', function (e) {
     e.preventDefault();
 
-    validator.validate(form);
+    let formularioValido = validator.validate(form);
+
+    if (formularioValido === false) {
+        return;
+    }
+
+    const formData = new FormData(form);
+	const plainFormData = Object.fromEntries(formData.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+    
+    fetch('http://localhost:3000/usuario', {
+    	method: 'POST',
+		headers: {
+			"Content-Type": "application/json"
+		},
+	    body: formDataJsonString
+    })
+    .then(data => {
+        alert("Usuário registrado com sucesso!");
+        form.reset();
+    })
+    .catch(function(res){ 
+        alert("Erro ao registrar usuário");
+        console.log(res);
+    });
+
 });
 
