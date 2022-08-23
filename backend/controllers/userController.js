@@ -3,11 +3,11 @@ const md5 = require('md5');
 
 class userController {
     novoUsuario(req, res) {
-        let { email, nome, sobrenome, senha } = req.body;
+        let { email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado} = req.body;
         senha = md5(senha);
         console.log("AAAAAA", email, nome, sobrenome, senha);
 
-        database.insert({ email, nome, sobrenome, senha }).table("usuarios").then(data => {
+        database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(data => {
             console.log(data)
             res.json({ message: "Usuário cadastrado com sucesso!" });
         }).catch(error => {
