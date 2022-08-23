@@ -3,9 +3,9 @@ const md5 = require('md5');
 
 class userController {
     novoUsuario(req, res) {
-        let { email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado} = req.body;
+        let { email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado } = req.body;
         senha = md5(senha);
-        console.log("AAAAAA", email, nome, sobrenome, senha);
+        //console.log("AAAAAA", email, nome, sobrenome, senha);
 
         database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(data => {
             console.log(data)
@@ -16,23 +16,44 @@ class userController {
         });
     }
 
-    login(req, res) {
-        let { email, senha} = req.body;
-        senha = md5(senha);
-        database.select( 'id', 'nome')
-        .from('usuarios')
-        .where('email', '=', email)
-        .where('senha', '=', senha)
-        .then(usuarios => {
-            if (usuarios.length > 0) {
-                res.json(usuarios[0]);
-            } else {
-                res.status(400).json({ message: "Usuário não encontrado" });
-            }
+    catalogarUsuario(req, res) {
+        database.select("*").table("usuarios").then(listas => {
+            // console.log(listas)
+            res.json(listas)
+
         }).catch(error => {
-            console.log(error);
-            res.status(400).json({ status: 400, message: "Erro ao encontrar usuário" });
-        });
+            console.log(error)
+        })
+    }
+
+    buscarUnicoUsuario(req, res) {
+        const id = req.params
+
+        database.select("*").table("usuarios").where({id:id}).then(buscar => {
+            console.log(buscar)
+            res.json(buscar)
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    login(req, res) {
+        let { email, senha } = req.body;
+        senha = md5(senha);
+        database.select('id', 'nome')
+            .from('usuarios')
+            .where('email', '=', email)
+            .where('senha', '=', senha)
+            .then(usuarios => {
+                if (usuarios.length > 0) {
+                    res.json(usuarios[0]);
+                } else {
+                    res.status(400).json({ message: "Usuário não encontrado" });
+                }
+            }).catch(error => {
+                console.log(error);
+                res.status(400).json({ status: 400, message: "Erro ao encontrar usuário" });
+            });
     }
 }
 

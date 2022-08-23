@@ -5,6 +5,10 @@ const userController = require('../controllers/userController')
 
 router.post('/usuario', userController.novoUsuario);
 
+router.get('/newuser', userController.catalogarUsuario)
+
+router.get('buscar', userController.buscarUnicoUsuario)
+
 router.post('/login', userController.login);
 
 router.get('/usuario', (req, res) => {
@@ -14,3 +18,7 @@ router.get('/usuario', (req, res) => {
 
 
 module.exports = router 
+
+function newFunction() {
+    return '/buscar/:id';
+}
