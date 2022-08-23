@@ -205,13 +205,17 @@ submit.addEventListener('click', function (e) {
         },
         body: formDataJsonString
     })
-        .then(data => {
+    .then(response => {
+            if (response.status==200) {
             alert("Usuário registrado com sucesso!");
             form.reset();
-        }).catch(function (res) {
+        } else {
             alert("Erro ao registrar usuário");
-            console.log(res);
-        });
+        }
+    }).catch(function (res) {
+        alert("Erro ao registrar usuário");
+        console.log(res);
+    });
 });
 
     // inserindo o viaCEP
