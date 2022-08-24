@@ -7,8 +7,8 @@ class userController {
         senha = md5(senha);
         //console.log("AAAAAA", email, nome, sobrenome, senha);
 
-        database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(data => {
-            res.json({ message: "Usuário cadastrado com sucesso!" });
+        database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(inserir => {
+            res.json({ message: "Usuário cadastrado com sucesso!!" });
         }).catch(error => {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao cadastrar usuário" });
@@ -16,8 +16,8 @@ class userController {
     }
 
     listar(req, res) {
-        database.select("*").table("usuarios").then(listas => {
-            res.json(listas);
+        database.select("*").table("usuarios").then(usuario => {
+            res.json(usuario);
         }).catch(error => {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao listar usuários" });
@@ -27,8 +27,8 @@ class userController {
     obter(req, res) {
         const id = req.params.id;
 
-        database.select("*").table("usuarios").where({id:id}).then(buscar => {
-            res.json(buscar);
+        database.select("*").table("usuarios").where({id:id}).then(usuario => {
+            res.json(usuario);
         }).catch(error => {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao obter usuário" });
@@ -40,7 +40,7 @@ class userController {
         const {email, nome, sobrenome, cep, endereco, numero, bairro, cidade, estado} = req.body;
 
         database.where({id:id}).update({email:email, nome:nome, sobrenome:sobrenome, cep:cep, endereco:endereco,
-        numero:numero, bairro:bairro, cidade:cidade, estado:estado }).table("usuarios").then(atualizar => {
+        numero:numero, bairro:bairro, cidade:cidade, estado:estado }).table("usuarios").then(resultado => {
             res.json({ message: "Usuário atualizado com sucesso!!" });
         }).catch(error => {
             console.log(error);
@@ -51,11 +51,24 @@ class userController {
     excluir(req, res) {
         const id = req.params.id
         
-        database.where({id:id}).del().table("usuarios").then(deletar=> {
-            res.json({message: "Usuário excluído com sucesso"});
+        database.where({id:id}).del().table("usuarios").then(resultado => {
+            res.json({message: "Usuário excluído com sucesso!!"});
         }).catch(error=> {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao excluir usuário" });
+        });
+    }
+
+    atualizarSenha(req, res) {
+        const id = req.params.id
+        let { senha } = req.body;
+        senha = md5(senha);
+
+        database.where({id:id}).update({senha:senha}).table("usuarios").then(atualizarSenha=> {
+            res.json({message: "Senha do usuário atualizada com sucesso!!"});
+        }).catch(error=> {
+            console.log(error);
+            res.status(400).json({ status: 400, message: "Erro ao atualizar senha do usuário"});
         });
     }
 

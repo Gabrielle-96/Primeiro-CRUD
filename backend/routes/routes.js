@@ -13,6 +13,8 @@ router.put('/usuario/:id', userController.atualizar);
 
 router.delete('/usuario/:id', userController.excluir);
 
+router.put('/usuario/senha/:id', userController.atualizarSenha);
+
 router.post('/login', userController.autenticar);
 
 module.exports = router;
