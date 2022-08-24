@@ -3,26 +3,16 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
 
-router.post('/usuario', userController.novoUsuario);
+router.post('/usuario', userController.inserir);
 
-router.get('/busca', userController.buscarUsuario)
+router.get('/usuario', userController.listar);
 
-router.get('/buscar/:id', userController.buscarUnicoUsuario)
+router.get('/usuario/:id', userController.obter);
 
-router.put('/atualizar/usuario/:id', userController.atualizarDados)
+router.put('/usuario/:id', userController.atualizar);
 
-router.delete('/deletar/dados/:id', userController.removerDados)
+router.delete('/usuario/:id', userController.excluir);
 
-router.post('/login', userController.login);
+router.post('/login', userController.autenticar);
 
-router.get('/usuario', (req, res) => {
-    return res.json("Ok")
-});
-
-
-
-module.exports = router 
-
-// function newFunction() {
-//     return '/buscar/:id';
-// }
+module.exports = router;
