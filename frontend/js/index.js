@@ -16,15 +16,15 @@ submit.addEventListener('click', function (e) {
         },
         body: formDataJsonString
     })
-        .then(response => {
-            if (response.status==200) {
-                alert("Usuário autenticado com sucesso!");
-            } else {
-                alert("Usuário não encontrado");
-            }
-            form.reset();
-        }).catch(function (res) {
-            alert("Erro ao autenticar usuário");
-            console.log(res);
-        });
+    .then(response => {
+        if (response.status==200) {
+            alert("Usuário autenticado com sucesso!");
+        } else {
+            alert("Usuário não encontrado");
+        }
+        form.reset();
+    }).catch(function (res) {
+        alert("Erro ao autenticar usuário");
+        console.log(res);
+    });
 });
