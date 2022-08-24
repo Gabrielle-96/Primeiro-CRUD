@@ -12,7 +12,7 @@ body {
     background-size: cover;
 }
 
-a, label { 
+a,label {
     font-size: .8rem;
 }
 
@@ -36,7 +36,7 @@ form {
     margin-bottom: 35px;
 }
 
-label, input {
+label,input {
     display: block;
     width: 100%;
     text-align: left;
@@ -51,7 +51,7 @@ label {
 }
 
 input {
-    border-bottom:  2px solid rgb(0, 0, 3);
+    border-bottom: 2px solid rgb(0, 0, 3);
     padding: 10px;
     font-size: 1rem;
     margin-bottom: 15px;
@@ -98,17 +98,10 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
-.fa-facebook-f{
+.fa-facebook-f {
     background-color: #3B5998;
 }
 
 .fa-linkedin {
     background-color: #0077b5;
 }
-
-/*.fa-google {
-    background-image: url('../img/imgGoogle.png');
-    margin: 5px;
-}
-*/
-

@@ -17,6 +17,6 @@ var knex = require('knex')({
     //     database: 'projeto_tora',
     // }
 
- });
+});
 
 module.exports = knex
