@@ -27,13 +27,35 @@ class userController {
     }
 
     buscarUnicoUsuario(req, res) {
-        const id = req.params
+        const id = req.params.id;
 
         database.select("*").table("usuarios").where({id:id}).then(buscar => {
             res.json(buscar)
-            console.log(buscar)
         }).catch(error => {
             console.log(error)
+        })
+    }
+
+    atualizarDados(req, res) {
+        const id = req.params.id
+        const {email:email, nome:nome, sobrenome:sobrenome, senha:senha, cep:cep, endereco:endereco,
+            numero:numero, bairro:bairro, cidade:cidade, estado:estado} = req.body
+
+        database.where({id:id}).update({email:email, nome:nome, sobrenome:sobrenome, senha:senha, cep:cep, endereco:endereco,
+        numero:numero, bairro:bairro, cidade:cidade, estado:estado }).table("usuarios").then(atualizar => {
+            res.json({ message: "Dados atualizados com sucesso!!" })
+        }).catch(error=>{
+            res.json(error)
+        })
+    }
+
+    removerDados(req, res) {
+        const id = req.params.id
+        
+        database.where({id:id}).del().table("usuarios").then(deletar=> {
+            res.json({message: "Informação deletada com sucesso"})
+        }).catch(error=> {
+            res.json(error)
         })
     }
 

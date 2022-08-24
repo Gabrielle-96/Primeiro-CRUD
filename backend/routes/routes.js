@@ -9,6 +9,10 @@ router.get('/busca', userController.buscarUsuario)
 
 router.get('/buscar/:id', userController.buscarUnicoUsuario)
 
+router.put('/atualizar/usuario/:id', userController.atualizarDados)
+
+router.delete('/deletar/dados/:id', userController.removerDados)
+
 router.post('/login', userController.login);
 
 router.get('/usuario', (req, res) => {
@@ -19,6 +23,6 @@ router.get('/usuario', (req, res) => {
 
 module.exports = router 
 
-function newFunction() {
-    return '/buscar/:id';
-}
+// function newFunction() {
+//     return '/buscar/:id';
+// }
