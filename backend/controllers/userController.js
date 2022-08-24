@@ -37,10 +37,9 @@ class userController {
 
     atualizar(req, res) {
         const id = req.params.id
-        const {email:email, nome:nome, sobrenome:sobrenome, senha:senha, cep:cep, endereco:endereco,
-            numero:numero, bairro:bairro, cidade:cidade, estado:estado} = req.body
+        const {email, nome, sobrenome, cep, endereco, numero, bairro, cidade, estado} = req.body;
 
-        database.where({id:id}).update({email:email, nome:nome, sobrenome:sobrenome, senha:senha, cep:cep, endereco:endereco,
+        database.where({id:id}).update({email:email, nome:nome, sobrenome:sobrenome, cep:cep, endereco:endereco,
         numero:numero, bairro:bairro, cidade:cidade, estado:estado }).table("usuarios").then(atualizar => {
             res.json({ message: "Usuário atualizado com sucesso!!" });
         }).catch(error => {
