@@ -5,7 +5,6 @@ class userController {
     inserir(req, res) {
         let { email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado } = req.body;
         senha = md5(senha);
-        //console.log("AAAAAA", email, nome, sobrenome, senha);
 
         database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(inserir => {
             res.json({ message: "Usuário cadastrado com sucesso!!" });
