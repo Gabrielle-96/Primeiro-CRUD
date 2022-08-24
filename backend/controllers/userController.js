@@ -16,9 +16,9 @@ class userController {
         });
     }
 
-    catalogarUsuario(req, res) {
+    buscarUsuario(req, res) {
         database.select("*").table("usuarios").then(listas => {
-            // console.log(listas)
+            console.log(listas)
             res.json(listas)
 
         }).catch(error => {
@@ -30,8 +30,8 @@ class userController {
         const id = req.params
 
         database.select("*").table("usuarios").where({id:id}).then(buscar => {
-            console.log(buscar)
             res.json(buscar)
+            console.log(buscar)
         }).catch(error => {
             console.log(error)
         })
