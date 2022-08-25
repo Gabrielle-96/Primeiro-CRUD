@@ -4,15 +4,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 function obterUsuarios() {
     fetch('http://localhost:3000/usuario')
-    .then(response => {
-console.log(response);alert("aqui");
-        if (response.status == 200) {
-            console.log(response);
-            montarTabelaUsuarios(response);
-        } else {
-            alert("Ocorreu um problema ao obter usuários");
-        }
-    }).catch(function (res) {
+.then(response =>{
+console.log(response,"aqui");
+return response.json();
+    })
+.then(data =>{
+      montarTabelaUsuarios(data);
+}).catch(function (res) {
         alert("Erro ao obter usuários");
         console.log(res);
     });
