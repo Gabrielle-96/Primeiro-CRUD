@@ -11,8 +11,20 @@
 <body>
     <div id="main-container">
         <h2> Usuários: </h2>
-        <table id="usuarios"></table>
-        <form id="consult-form">
+        <table id="usuarios">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>E-mail</td>
+                    <td>Endereço/td>
+                    <td>Excluir</td>
+                    <td>Editar</td>
+                </tr>
+            </thead>
+            <tbody id="usuariosBody">
+            </tbody>
+        </table>
+<!--         <form id="consult-form">
             <div class="full-box">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" placeholder="Digite seu e-mail" autocomplete="off"
@@ -61,7 +73,7 @@
                 <input type="text" name="editar" id="editar">
             </div>
     </div>
-    </form>
+    </form> -->
     <script src="./js/consultaUsuario.js"></script>
 </body>
 
