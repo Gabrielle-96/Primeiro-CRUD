@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 function obterUsuarios() {
-    fetch('http://localhost:3000/usuario', {
-        method: 'GET'
-    })
+    fetch('http://localhost:3000/usuario')
     .then(response => {
+console.log(response);alert("aqui");
         if (response.status == 200) {
             console.log(response);
             montarTabelaUsuarios(response);
