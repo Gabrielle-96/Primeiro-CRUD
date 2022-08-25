@@ -8,15 +8,6 @@ var knex = require('knex')({
         password: 'acesso',
         database: 'projeto-tora',
     }
-
-    // connection: {
-    //     host: 'localhost',
-    //     user: 'root',
-    //     port: 3306,
-    //     password: 'acesso',
-    //     database: 'projeto_tora',
-    // }
-
 });
 
 module.exports = knex
