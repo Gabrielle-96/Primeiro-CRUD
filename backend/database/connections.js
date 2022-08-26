@@ -6,7 +6,7 @@ var knex = require('knex')({
         user: 'root',
         port: 3306,
         password: 'acesso',
-        database: 'projeto_tora',
+        database: 'projeto-tora',
     }
 });
 

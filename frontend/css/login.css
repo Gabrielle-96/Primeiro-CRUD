@@ -12,7 +12,8 @@ body {
     background-size: cover;
 }
 
-a,label {
+a,
+label {
     font-size: .8rem;
 }
 
@@ -26,7 +27,7 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     padding: 20px 30px;
-    margin-top: 20vh;
+    margin-top: 10vh;
     border-radius: 20px;
     text-align: center;
 }
@@ -36,13 +37,15 @@ form {
     margin-bottom: 35px;
 }
 
-label,input {
+label,
+input {
     display: block;
     width: 100%;
     text-align: left;
 }
 
-input:focus, label:focus {
+input:focus,
+label:focus {
     outline: none;
 }
 
@@ -84,7 +87,8 @@ input[type="submit"]:hover {
     transition: .5s;
 }
 
-#social-container, #social-container p {
+#social-container,
+#social-container p {
     margin-bottom: 20px;
 }
 
