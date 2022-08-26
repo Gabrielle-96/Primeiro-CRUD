@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
 function obterUsuarios() {
     fetch('http://localhost:3000/usuario')
     .then(response => {
-        console.log(response,"aqui");
         return response.json();
     })
     .then(usuarios => {
-          montarTabelaUsuarios(usuarios);
+        montarTabelaUsuarios(usuarios);
     })
     .catch(function (res) {
         alert("Erro ao obter usuários");
@@ -19,41 +18,47 @@ function obterUsuarios() {
 
 function montarTabelaUsuarios(usuarios) {
     let conteudoTabela = document.getElementById("usuariosBody");
+
     usuarios.forEach(usuario => {
-        let linha = criarLinhaUsuario(usuario);
-        conteudoTabela.appendChild(linha);
+        let trUsuario = criarLinhaUsuario(usuario);
+        conteudoTabela.appendChild(trUsuario);
     });
 }
 
 function criarLinhaUsuario(usuario) {
-    console.log(usuario);
 
-    linha = document.createElement("tr");
+    let trUsuario = document.createElement("tr");
+    trUsuario.id = `tr_${usuario.id}`;
     
-    tdNome = document.createElement("td");
-    tdNome.innerHTML = usuario.nome;
+    let tdNome = document.createElement("td");
+    tdNome.innerHTML = `${usuario.nome} ${usuario.sobrenome}`;
     
-    tdEmail = document.createElement("td");      
+    let tdEmail = document.createElement("td");      
     tdEmail.innerHTML = usuario.email;
     
-    tdBtnExcluir = document.createElement("td"); 
+    let tdEndereco = document.createElement("td");
+    tdEndereco.innerHTML = usuario.endereco;
+
+    let tdBtnExcluir = document.createElement("td"); 
     tdBtnExcluir.innerHTML = `<button type='button' onclick="excluirUsuario('${usuario.id}')" >Excluir</button>`;
     
-    tdBtnEditar = document.createElement("td"); 
+    let tdBtnEditar = document.createElement("td"); 
     tdBtnEditar.innerHTML = `<button type='button' onclick="editarUsuario('${usuario.id}')" >Editar</button>`;
 
-    linha.appendChild(tdNome);
-    linha.appendChild(tdEmail);
-    linha.appendChild(tdBtnExcluir);
-    linha.appendChild(tdBtnEditar);
+    trUsuario.appendChild(tdNome);
+    trUsuario.appendChild(tdEmail);
+    trUsuario.appendChild(tdEndereco);
+    trUsuario.appendChild(tdBtnExcluir);
+    trUsuario.appendChild(tdBtnEditar);
 
-    return linha;
+    return trUsuario;
 }
 
 function excluirUsuario(id) {
     fetch(`http://localhost:3000/usuario/${id}`, { method: 'DELETE' })
     .then(response => {
         alert("Usuário excluído com sucesso!");
+        document.getElementById(`tr_${id}`).remove();
     }).catch(function (res) {
         alert("Erro ao excluir usuários");
         console.log(res);
@@ -61,6 +66,5 @@ function excluirUsuario(id) {
 }
 
 function editarUsuario(id) {
-    console.log(id);
-    window.location.href = `cadastroUsuario.html/?id=${id}`;
+    window.location.href = `edicaoUsuario.html?id=${id}`;
 }

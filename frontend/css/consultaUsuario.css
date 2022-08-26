@@ -27,13 +27,15 @@ body {
 }
 
 #main-container {
-    width: 500px;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
     background-color: #FFF;
     border-radius: 23px;
     padding: 25px;
     margin-top: 10vh;
+    min-height: 100vh;
+    margin-bottom: 10vh;
 }
 
 #main-container h2 {
@@ -120,4 +122,17 @@ input[type="submit"]:hover {
 
 .template {
     display: none;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 5px;
 }

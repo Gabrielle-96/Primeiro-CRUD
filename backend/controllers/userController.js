@@ -15,7 +15,7 @@ class userController {
     }
 
     listar(req, res) {
-        database.select("email", "nome", "sobrenome", "cep", "endereco", "numero", "bairro", "cidade", "estado").table("usuarios").then(usuario => {
+        database.select("id", "email", "nome", "sobrenome", "cep", "endereco", "numero", "bairro", "cidade", "estado").table("usuarios").then(usuario => {
             res.json(usuario);
         }).catch(error => {
             console.log(error);
@@ -26,8 +26,12 @@ class userController {
     obter(req, res) {
         const id = req.params.id;
 
-        database.select("email", "nome", "sobrenome", "cep", "endereco", "numero", "bairro", "cidade", "estado").table("usuarios").where({ id: id }).then(usuario => {
-            res.json(usuario);
+        database.select("id", "email", "nome", "sobrenome", "cep", "endereco", "numero", "bairro", "cidade", "estado").table("usuarios").where({ id: id }).then(usuario => {
+            if (usuario.length > 0) {
+                res.json(usuario[0]);
+            } else {
+                res.json("");
+            }
         }).catch(error => {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao obter usuário" });
