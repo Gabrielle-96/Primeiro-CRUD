@@ -40,10 +40,10 @@ function criarLinhaUsuario(usuario) {
     tdEndereco.innerHTML = usuario.endereco;
 
     let tdBtnExcluir = document.createElement("td"); 
-    tdBtnExcluir.innerHTML = `<button type='button' onclick="excluirUsuario('${usuario.id}')" >Excluir</button>`;
+    tdBtnExcluir.innerHTML = `<button type='button' class='btn-delete' onclick="excluirUsuario('${usuario.id}')" >Excluir</button>`;
     
     let tdBtnEditar = document.createElement("td"); 
-    tdBtnEditar.innerHTML = `<button type='button' onclick="editarUsuario('${usuario.id}')" >Editar</button>`;
+    tdBtnEditar.innerHTML = `<button type='button' class='btn-edit' onclick="editarUsuario('${usuario.id}')" >Editar</button>`;
 
     trUsuario.appendChild(tdNome);
     trUsuario.appendChild(tdEmail);
