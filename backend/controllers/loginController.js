@@ -1,10 +1,12 @@
 const database = require('../database/connections');
+const bcrypt = require('bcrypt');
 
 class loginController {
 
     autenticar(req, res) {
         let { email, senha } = req.body;
-        senha = md5(senha);
+        const saltRounds = 10;
+        senha = bcrypt.hashSync(senha, salt);
 
         database.select('id', 'nome')
             .from('usuarios')

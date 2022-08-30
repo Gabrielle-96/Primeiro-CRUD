@@ -1,10 +1,11 @@
 const database = require('../database/connections')
-const md5 = require('md5');
+const bcrypt = require('bcrypt');
 
 class userController {
     inserir(req, res) {
         let { email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado } = req.body;
-        senha = md5(senha);
+        const saltRounds = 10;
+        senha = bcrypt.hashSync(senha, saltRounds);
 
         database.insert({ email, nome, sobrenome, senha, cep, endereco, numero, bairro, cidade, estado }).table("usuarios").then(inserir => {
             res.json({ message: "Usuário cadastrado com sucesso!!" });
@@ -67,7 +68,8 @@ class userController {
     atualizarSenha(req, res) {
         const id = req.params.id
         let { senha } = req.body;
-        senha = md5(senha);
+        const saltRounds = 10;
+        senha = bcrypt.hashSync(senha, salt);
 
         database.where({ id: id }).update({ senha: senha }).table("usuarios").then(atualizarSenha => {
             res.json({ message: "Senha do usuário atualizada com sucesso!!" });
@@ -79,7 +81,8 @@ class userController {
 
     autenticar(req, res) {
         let { email, senha } = req.body;
-        senha = md5(senha);
+        const saltRounds = 10;
+        senha = bcrypt.hashSync(senha, salt);
 
         database.select('id', 'nome')
             .from('usuarios')
