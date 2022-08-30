@@ -5,16 +5,20 @@ class loginController {
 
     autenticar(req, res) {
         let { email, senha } = req.body;
-        const saltRounds = 10;
-        senha = bcrypt.hashSync(senha, salt);
+        //const saltRounds = 10;
+        // senha = bcrypt.hashSync(senha, saltRounds);
 
-        database.select('id', 'nome')
+        database.select('id', 'nome', 'senha')
             .from('usuarios')
             .where('email', '=', email)
-            .where('senha', '=', senha)
+            //.where('senha', '=', senha)
             .then(usuarios => {
                 if (usuarios.length > 0) {
-                    res.json(usuarios);
+                    if (bcrypt.compareSync(senha, usuarios[0].senha)) {
+                        res.json(usuarios);
+                    } else {
+                        res.status(400).json({ message: "E-mail ou senha incorretos" });
+                    }
                 } else {
                     res.status(400).json({ message: "Usuário não encontrado" });
                 }

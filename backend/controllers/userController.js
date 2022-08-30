@@ -69,7 +69,7 @@ class userController {
         const id = req.params.id
         let { senha } = req.body;
         const saltRounds = 10;
-        senha = bcrypt.hashSync(senha, salt);
+        senha = bcrypt.hashSync(senha, saltRounds);
 
         database.where({ id: id }).update({ senha: senha }).table("usuarios").then(atualizarSenha => {
             res.json({ message: "Senha do usuário atualizada com sucesso!!" });
@@ -77,27 +77,6 @@ class userController {
             console.log(error);
             res.status(400).json({ status: 400, message: "Erro ao atualizar senha do usuário" });
         });
-    }
-
-    autenticar(req, res) {
-        let { email, senha } = req.body;
-        const saltRounds = 10;
-        senha = bcrypt.hashSync(senha, salt);
-
-        database.select('id', 'nome')
-            .from('usuarios')
-            .where('email', '=', email)
-            .where('senha', '=', senha)
-            .then(usuarios => {
-                if (usuarios.length > 0) {
-                    res.json(usuarios[0]);
-                } else {
-                    res.status(400).json({ message: "Usuário não encontrado" });
-                }
-            }).catch(error => {
-                console.log(error);
-                res.status(400).json({ status: 400, message: "Erro ao encontrar usuário" });
-            });
     }
 }
 
