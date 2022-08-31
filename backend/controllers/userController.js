@@ -78,6 +78,13 @@ class userController {
             res.status(400).json({ status: 400, message: "Erro ao atualizar senha do usuário" });
         });
     }
+
+    obterAutenticado(req, res) {
+        res.json({ usuario: {
+                nome: req.user.nome,
+                email: req.user.email
+        } });
+    }
 }
 
 module.exports = new userController();

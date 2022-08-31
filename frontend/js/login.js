@@ -16,9 +16,14 @@ submit.addEventListener('click', function (e) {
         },
         body: formDataJsonString
     })
-        .then(response => {
+        .then(async(response) => {
             if (response.status == 200) {
+                //Grava no localStorage do navegador o token de acesso
+                let dadosResposta = await response.json();
+                localStorage.setItem("token", dadosResposta.token);
+
                 alert("Usuário autenticado com sucesso!");
+                window.location.href = `home.html`;
             } else {
                 alert("Usuário não encontrado");
             }
