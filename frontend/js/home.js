@@ -18,8 +18,7 @@ function obterUsuarioLogado() {
         }
     })
     .then(dados => {
-        console.log(dados);
-        alert(`Bem vindo ${dados.usuario.nome}`);
+        alert(`Bem vindo(a) ${dados.usuario.nome} !`);
     })
     .catch(function (res) {
         alert("Erro ao obter dados do usuário logado");
