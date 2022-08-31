@@ -9,13 +9,21 @@ function obterUsuarioLogado() {
         }
     })
     .then(response => {
-        return response.json();
+        if (response.status == 200) {
+            return response.json();
+        } else {
+            alert("Erro ao obter dados do usuário logado");
+            window.location.href = `login.html`;
+            return;
+        }
     })
-    .then(usuario => {
-        console.log(usuario);
+    .then(dados => {
+        console.log(dados);
+        alert(`Bem vindo ${dados.usuario.nome}`);
     })
     .catch(function (res) {
         alert("Erro ao obter dados do usuário logado");
         console.log(res);
+        window.location.href = `login.html`;
     });
 }
