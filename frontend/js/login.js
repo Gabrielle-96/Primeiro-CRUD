@@ -16,9 +16,8 @@ submit.addEventListener('click', function (e) {
         },
         body: formDataJsonString
     })
-        .then(async(response) => {
+        .then(async (response) => {
             if (response.status == 200) {
-                //Grava no localStorage do navegador o token de acesso
                 let dadosResposta = await response.json();
                 localStorage.setItem("token", dadosResposta.token);
 

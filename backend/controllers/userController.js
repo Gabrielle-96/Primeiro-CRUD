@@ -80,10 +80,12 @@ class userController {
     }
 
     obterAutenticado(req, res) {
-        res.json({ usuario: {
+        res.json({
+            usuario: {
                 nome: req.user.nome,
                 email: req.user.email
-        } });
+            }
+        });
     }
 }
 

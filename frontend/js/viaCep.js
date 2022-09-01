@@ -1,5 +1,3 @@
-// inserindo o viaCEP
-
 const limparFormulario = (endereco) => {
     document.getElementById('endereco').value = '';
     document.getElementById('bairro').value = '';

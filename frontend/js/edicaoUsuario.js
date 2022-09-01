@@ -27,17 +27,17 @@ submit.addEventListener('click', function (e) {
         },
         body: formDataJsonString
     })
-    .then(response => {
-        if (response.status == 200) {
-            alert("Usuário atualizado com sucesso!");
-            window.location.href = `consultaUsuario.html`;
-        } else {
+        .then(response => {
+            if (response.status == 200) {
+                alert("Usuário atualizado com sucesso!");
+                window.location.href = `consultaUsuario.html`;
+            } else {
+                alert("Erro ao atualizar usuário");
+            }
+        }).catch(function (res) {
             alert("Erro ao atualizar usuário");
-        }
-    }).catch(function (res) {
-        alert("Erro ao atualizar usuário");
-        console.log(res);
-    });
+            console.log(res);
+        });
 });
 
 function obterUsuario() {
@@ -45,16 +45,16 @@ function obterUsuario() {
 
     if (idUsuario > 0) {
         fetch(`http://localhost:3000/usuario/${idUsuario}`)
-        .then(response => {
-            return response.json();
-        })
-        .then(usuario => {
-            carregarDadosUsuarioTela(usuario);
-        })
-        .catch(function (res) {
-            alert("Erro ao obter usuário");
-            console.log(res);
-        });
+            .then(response => {
+                return response.json();
+            })
+            .then(usuario => {
+                carregarDadosUsuarioTela(usuario);
+            })
+            .catch(function (res) {
+                alert("Erro ao obter usuário");
+                console.log(res);
+            });
     }
 }
 
@@ -65,7 +65,7 @@ function obterIdUsuarioUrl() {
     if (!urlParams.has("id")) {
         alert("Usuário não identificado!");
         return 0;
-    } 
+    }
 
     return urlParams.get('id');
 }

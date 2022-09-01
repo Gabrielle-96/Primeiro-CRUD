@@ -13,25 +13,25 @@ class loginController {
             .then(usuarios => {
                 if (usuarios.length > 0) {
                     if (bcrypt.compareSync(senha, usuarios[0].senha)) {
-                    const token = jwt.sign({
-                        id: usuarios[0].id,
-                        nome: usuarios[0].nome,
-                        senha: usuarios[0].senha,
-                        email: usuarios[0].email
-                    },
-                    process.env.JWT_KEY,
-                    {
-                        expiresIn: "5min"
-                    });
-
-                    res.json({
-                        message: "Autenticado com sucesso",
-                        token: token,
-                        usuario: {
+                        const token = jwt.sign({
+                            id: usuarios[0].id,
                             nome: usuarios[0].nome,
-                            email: usuarios[0].email,
-                        }
-                    });
+                            senha: usuarios[0].senha,
+                            email: usuarios[0].email
+                        },
+                            process.env.JWT_KEY,
+                            {
+                                expiresIn: "5min"
+                            });
+
+                        res.json({
+                            message: "Autenticado com sucesso",
+                            token: token,
+                            usuario: {
+                                nome: usuarios[0].nome,
+                                email: usuarios[0].email,
+                            }
+                        });
 
                     } else {
                         res.status(401).json({ message: "Falha na autenticação" });
